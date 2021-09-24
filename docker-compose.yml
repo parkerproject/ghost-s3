@@ -14,14 +14,14 @@ services:
     environment:
       database__client: mysql
       database__connection__host: mysql
-      database__connection__user: blog-user
-      database__connection__password: supersecret
+      database__connection__user: '${MYSQL_USER}'
+      database__connection__password: '${MYSQL_PASSWORD}'
       database__connection__database: db
       storage__active: s3
-      storage__s3__accessKeyId: <AWS Access Key>
-      storage__s3__secretAccessKey: <AWS Secret Key>
-      storage__s3__region: us-east-1
-      storage__s3__bucket: <s3 bucket name>
+      storage__s3__accessKeyId: '${AWS_ACCESS_KEY_ID}'
+      storage__s3__secretAccessKey: '${AWS_SECRET_ACCESS_KEY}'
+      storage__s3__region: '${AWS_DEFAULT_REGION}'
+      storage__s3__bucket: '${GHOST_STORAGE_ADAPTER_S3_PATH_BUCKET}'
 
   mysql:
     image: mysql:5.7
@@ -33,8 +33,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
-      MYSQL_USER: blog-user
-      MYSQL_PASSWORD: supersecret
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
 
 networks:
   ghost:
